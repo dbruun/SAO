@@ -80,12 +80,34 @@ docker compose up --build
 
 ---
 
+## Sample Test Documents
+
+Ready-made fake driver's licence images are in the `sample-documents/` folder:
+
+| File | Scenario | Expected status |
+|------|----------|-----------------|
+| `sample-documents/pass-license.png` | Perfect match | **PASS** |
+| `sample-documents/review-license.png` | Address has extra `Apt 2B` | **REVIEW** |
+| `sample-documents/fail-license.png` | Different person + DOB mismatch | **FAIL** |
+
+### Run all three scenarios at once
+
+```bash
+chmod +x sample-documents/test.sh
+./sample-documents/test.sh          # default: http://localhost:5000
+```
+
+See [`sample-documents/README.md`](sample-documents/README.md) for full details
+and how to regenerate the images.
+
+---
+
 ## Example curl Requests
 
 ### PASS scenario (filename contains "pass")
 ```bash
 curl -X POST http://localhost:5000/api/verification \
-  -F "fileFront=@pass-license.jpg" \
+  -F "fileFront=@sample-documents/pass-license.png" \
   -F "fullName=John Michael Smith" \
   -F "address=123 Main Street, Springfield, IL 62701" \
   -F "dateOfBirth=1985-06-15"
@@ -94,16 +116,16 @@ curl -X POST http://localhost:5000/api/verification \
 ### REVIEW scenario (filename contains "review")
 ```bash
 curl -X POST http://localhost:5000/api/verification \
-  -F "fileFront=@review-license.jpg" \
+  -F "fileFront=@sample-documents/review-license.png" \
   -F "fullName=John Michael Smith" \
   -F "address=123 Main Street, Springfield, IL 62701" \
   -F "dateOfBirth=1985-06-15"
 ```
 
-### FAIL scenario (any other filename)
+### FAIL scenario (filename contains "fail")
 ```bash
 curl -X POST http://localhost:5000/api/verification \
-  -F "fileFront=@license.jpg" \
+  -F "fileFront=@sample-documents/fail-license.png" \
   -F "fullName=John Michael Smith" \
   -F "address=123 Main Street, Springfield, IL 62701" \
   -F "dateOfBirth=1985-06-15"
