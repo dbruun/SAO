@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run SAO via Docker Compose",
+			"type": "shell",
+			"command": "docker",
+			"args": [
+				"compose",
+				"up",
+				"--build"
+			],
+			"isBackground": true,
+			"group": "build"
+		},
+		{
+			"label": "Run SAO via Docker Compose",
+			"type": "shell",
+			"command": "docker",
+			"args": [
+				"compose",
+				"up",
+				"--build"
+			],
+			"isBackground": true,
+			"group": "build"
+		}
+	]
+}
