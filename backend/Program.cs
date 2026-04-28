@@ -31,6 +31,8 @@ else
 builder.Services.AddScoped<IAddressValidationService, StubAddressValidationService>();
 builder.Services.AddScoped<ILivenessService, StubLivenessService>();
 builder.Services.AddScoped<IVerificationService, VerificationService>();
+builder.Services.AddScoped<IBackendRecordsService, MockBackendRecordsService>();
+builder.Services.AddScoped<IDocumentScanService, DocumentScanService>();
 
 var app = builder.Build();
 
